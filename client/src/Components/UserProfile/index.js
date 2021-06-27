@@ -50,7 +50,8 @@ class UserProfile extends Component {
     const options={
       method:'GET',
       headers:{
-        Authorization:`Bearer ${jwtToken}`
+        Authorization:`Bearer ${jwtToken}`,
+        Accept: "application/vnd.heroku+json; version=3"
       }
 
     }
