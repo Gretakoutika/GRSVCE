@@ -11,11 +11,11 @@ const { Console } = require("console");
 const PORT=process.env.PORT || 4000;
 //app.use(express.static(path.join(__dirname,"client/build")))
 
-//app.use(cors());
+app.use(cors());
 
 app.use(express.json());
 
-const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'https://grsvce.herokuapp.com/']
+/*const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'https://grsvce.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
@@ -28,7 +28,7 @@ const corsOptions = {
     }
   }
 }
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));*/
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
