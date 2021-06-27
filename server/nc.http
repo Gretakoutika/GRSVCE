@@ -1,0 +1,61 @@
+###
+POST http://localhost:4000/login HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "username":"1602-18-737-069@vce.ac.in",
+    "password":"Greta0910"
+}
+
+###
+
+GET http://localhost:4000/students/1/complaints/?status=Pending
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoic3VjY2VzcyIsInVzZXJfdHlwZSI6IlN0dWRlbnQiLCJ1c2VyaWQiOjEsImlhdCI6MTYyNDA5ODAxOH0.QKn-dDna-EUSQSIeluMK-uIWvZgj3FUenvNLTgz57hU
+
+
+###
+POST http://localhost:4000/students/2/complaints HTTP/1.1
+
+Content-Type: application/json
+
+{ 
+    "department":"finance",
+    "complaintDesc":"new2"
+}
+###
+
+PUT  http://localhost:4000/students/1/complaints HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "forwardstatus": "Forwarded",
+    "complaintid": "25"
+}
+###
+GET http://localhost:4000/faculty/?dept=CSE
+
+###
+
+GET http://localhost:4000/academiccomplaints/?dept=CSE
+
+###
+
+GET http://localhost:4000/faculty/7/complaints/?status=Pending
+
+###
+GET http://localhost:4000/faculty/7/25/
+###
+POST http://localhost:4000/25/solution HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "solution":"This is the solution"
+}
+
+###
+
+PUT  http://localhost:4000/25/changestatus HTTP/1.1
+
+###
+
+GET http://localhost:4000/nonacademiccomplaints/?dept=Finance

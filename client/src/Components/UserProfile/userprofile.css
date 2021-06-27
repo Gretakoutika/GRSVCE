@@ -1,0 +1,62 @@
+.user-card-container {
+  display: flex;
+  align-items: left;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+.avatar {
+  width: 25vh;
+  height: 25vh;
+  border-radius: 10px;
+}
+.user-details-container {
+  margin-left: 12px;
+}
+.user-name {
+  text-align: left;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+}
+.user-rollnumber {
+  text-align: left;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+}
+.user-designation {
+  text-align: left;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+}
+.list-container {
+  text-align: center;
+}
+#navbar {
+  background-color: "#2471a3";
+  color: white;
+}
+Nav a,
+#basic-nav-dropdown {
+  color: white;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+Nav a:hover,
+#basic-nav-dropdown :hover {
+  border-bottom: solid white 3px;
+  text-decoration: none;
+  color: white;
+}
+#basic-nav-dropdown {
+  margin-right: 0px;
+  margin-top: 0px;
+}
+a.dropdown-item:hover {
+  background-color: #2471a3;
+  color: white;
+}
+
+#searchbar {
+  width: 300px;
+  padding: 10px;
+  border: 0px;
+}

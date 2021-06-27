@@ -1,0 +1,14 @@
+.heading {
+  color: #2471a3;
+  margin: 10px;
+  font-size: 150%;
+}
+.ans {
+  color: black;
+  margin: 15px;
+  font-size: 130%;
+}
+#text-area {
+  overflow: scroll;
+  color: grey;
+}

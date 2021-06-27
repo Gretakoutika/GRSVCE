@@ -1,0 +1,33 @@
+.img-holder {
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    border: 1px black solid;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+  #img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  #input[type="file"] {
+    display: none;
+  }
+  
+  .image-upload {
+
+    width: 200px;
+    height: 50px;
+    color: rgba(10, 1, 1, 0.87);
+    border-radius: 10px;
+    background-color:#2471a3;
+    color:white;
+    padding:10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .image-upload:hover{
+
+    text-decoration:underline
+  }

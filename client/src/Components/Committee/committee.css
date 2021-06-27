@@ -1,0 +1,13 @@
+.item {
+  margin: 5px;
+  color: white;
+  font-family: Calibri (Body), Helvetica, sans-serif;
+  font-size: medium;
+  padding: 3px;
+}
+.item:hover {
+  border-bottom: solid white 2px;
+}
+#nbar {
+  background-color: #2471a3;
+}

@@ -1,0 +1,54 @@
+
+.container-fluid{
+  margin:10%;
+}
+.Content {
+  text-align: center;
+  font-family: Calibri (Body), Helvetica, sans-serif;
+}
+.secondHalf {
+  margin: auto;
+  text-align: center;
+}
+h1 {
+  padding: 20px;
+}
+.input-label {
+  font: Calibri (Body), Helvetica, sans-serif;
+  padding: 10px;
+  text-align: le;
+  margin: 10px;
+  font-size: 130%;
+  color: #212121;
+}
+#USERNAME,
+#PASSWORD {
+  font: Calibri (Body), Helvetica, sans-serif;
+  width: 300px;
+  padding: 10px;
+  border: 0px;
+  border-bottom: solid #757575 2px;
+}
+
+.loginForm {
+  font-size: 300%;
+}
+.login-button {
+  color: black;
+  border-radius: 50px;
+  font: Calibri (Body), Helvetica, sans-serif;
+  font-size: 150%;
+  padding: 10px;
+  margin: 20px;
+  text-align: center;
+  width: auto;
+  width: 30%;
+  height: auto;
+}
+.login-button:hover {
+  border: 0px;
+}
+.error-message {
+  color: red;
+  font: Calibri (Body), Helvetica, sans-serif;
+}

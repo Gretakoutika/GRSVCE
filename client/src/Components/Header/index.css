@@ -1,0 +1,17 @@
+#cont {
+  border-top: solid #2471a3 10px;
+}
+h3 {
+  color: #2471a3;
+}
+
+.collegeHeading h5 {
+  color: red;
+  font-style: italic;
+  margin: 0px;
+}
+
+.collegeHeading p {
+  font-style: italic;
+  margin: 0px;
+}
