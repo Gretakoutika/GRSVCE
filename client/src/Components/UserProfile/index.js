@@ -47,25 +47,41 @@ class UserProfile extends Component {
     const { params } = match
     const { id } = params
     const jwtToken=Cookies.get('jwt_token');
-    const options={
+    const url=`/students/${id}/complaints/?status=Solved`;
+    /*const options={
       method:'GET',
       headers:{
-        Authorization:`Bearer ${jwtToken}`,
-        Accept: "application/vnd.heroku+json; version=3"
+        Authorization:`Bearer ${jwtToken}`
       }
 
     }
     //proxy
 
 
-    const url=`/students/${id}/complaints/?status=Solved`;
+    
     const response = await fetch(url,options)
     const data = await response.json()
+    this.setState({ StudentSolvedComplaints: data, isLoading:false });*/
 
-    this.setState({ StudentSolvedComplaints: data, isLoading:false });
-    
-  }
 
+    fetch(url, {
+      method: 'GET',
+      mode:'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization:`Bearer ${jwtToken}`,
+      }
+    })
+    .then(response => { return response.json();})
+      .then(responseData=>{
+        console.log(responseData);
+        this.setState({ StudentSolvedComplaints: responseData, isLoading:false });
+        return responseData;
+      })
+      .catch((error) => console.log("error",error));
+    }
+  
   
     onLogout =()=> {
       const {history} = this.props;
