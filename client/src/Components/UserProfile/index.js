@@ -8,6 +8,7 @@ import {Search} from 'react-bootstrap-icons'
 
 import Header from '../Header/index.js'
 import { Component } from 'react'
+import { response } from 'express';
 
 
 
@@ -49,38 +50,34 @@ class UserProfile extends Component {
     const jwtToken=Cookies.get('jwt_token');
     const url=`/students/${id}/complaints/?status=Solved`;
     console.log("fetching data");
-    const options={
+    /*const options={
       method:'GET',
       mode:'cors',
-      
       headers:{
-        Authorization:`Bearer ${jwtToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Authorization:`Bearer ${jwtToken}`
       }
     }
     //proxy
     const response = await fetch(url,options)
     const data = await response.json()
-    this.setState({ StudentSolvedComplaints: data, isLoading:false });
+    this.setState({ StudentSolvedComplaints: data, isLoading:false });*/
 
 
-   /* fetch(url, {
+    fetch(url, {
       method: 'GET',
       mode:'cors',
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
         Authorization:`Bearer ${jwtToken}`,
       }
     })
     .then(response => { return response.json();})
-      .then(responseData=>{
-        console.log(responseData);
-        this.setState({ StudentSolvedComplaints: responseData, isLoading:false });
-        return responseData;
+      .then(response=>{
+        console.log(response);
+        this.setState({ StudentSolvedComplaints: response, isLoading:false });
+        return response;
       })
-      .catch((error) => console.log("error",error));*/
+      .catch((error) => console.log("error",error));
   }
   
   
