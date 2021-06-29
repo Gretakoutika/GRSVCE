@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://localhost:4000",
   "engines": {
     "node": "16.1.0",
     "npm": "7.11.2"
