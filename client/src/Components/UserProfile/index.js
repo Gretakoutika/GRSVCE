@@ -47,7 +47,7 @@ class UserProfile extends Component {
     const { params } = match
     const { id } = params
     const jwtToken=Cookies.get('jwt_token');
-    const url=`/students/${id}/complaints/?status=Solved`;
+    const url=`http://localhost:4000/students/${id}/complaints/?status=Solved`;
     console.log("fetching data");
    /* const options={
       method:'GET',
