@@ -69,7 +69,7 @@ const authenticateToken = (request, response, next) => {
     response.status(401);
     response.send("Invalid JWT Token");
   } else {
-    jwt.verify(jwtToken, "RSGECV", async (error, payload) => {
+    jwt.verify(jwtToken, process.env.SECRET, async (error, payload) => {
       if (error) {
         response.status(401);
         response.send("Invalid JWT Token");
@@ -98,7 +98,7 @@ app.post("/login",async (request, response) => {
       const userid=dbUser.USER_ID;
       console.log(userType);
       const payload={"type":"success","user_type":userType,userid};
-      const secret="RSGECV";
+      const secret=process.env.SECRET;
       const jwttoken=jwt.sign(payload,secret);
       const result={"type":"success","user_type":userType,userid,jwttoken};
       response.send(result);
