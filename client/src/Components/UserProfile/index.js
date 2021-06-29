@@ -48,6 +48,7 @@ class UserProfile extends Component {
     const { id } = params
     const jwtToken=Cookies.get('jwt_token');
     const url=`/students/${id}/complaints/?status=Solved`;
+    console.log("fetching data");
     const options={
       method:'GET',
       mode:'cors',
