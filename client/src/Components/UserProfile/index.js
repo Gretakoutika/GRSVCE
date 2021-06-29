@@ -52,10 +52,12 @@ class UserProfile extends Component {
     const options={
       method:'GET',
       mode:'cors',
+      
       headers:{
-        Authorization:`Bearer ${jwtToken}`
+        Authorization:`Bearer ${jwtToken}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
-
     }
     //proxy
     const response = await fetch(url,options)
