@@ -48,23 +48,21 @@ class UserProfile extends Component {
     const { id } = params
     const jwtToken=Cookies.get('jwt_token');
     const url=`/students/${id}/complaints/?status=Solved`;
-    /*const options={
+    const options={
       method:'GET',
+      mode:'cors',
       headers:{
         Authorization:`Bearer ${jwtToken}`
       }
 
     }
     //proxy
-
-
-    
     const response = await fetch(url,options)
     const data = await response.json()
-    this.setState({ StudentSolvedComplaints: data, isLoading:false });*/
+    this.setState({ StudentSolvedComplaints: data, isLoading:false });
 
 
-    fetch(url, {
+   /* fetch(url, {
       method: 'GET',
       mode:'cors',
       headers: {
@@ -79,8 +77,8 @@ class UserProfile extends Component {
         this.setState({ StudentSolvedComplaints: responseData, isLoading:false });
         return responseData;
       })
-      .catch((error) => console.log("error",error));
-    }
+      .catch((error) => console.log("error",error));*/
+  }
   
   
     onLogout =()=> {
