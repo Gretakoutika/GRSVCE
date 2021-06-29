@@ -8,7 +8,6 @@ import {Search} from 'react-bootstrap-icons'
 
 import Header from '../Header/index.js'
 import { Component } from 'react'
-import { response } from 'express';
 
 
 
@@ -50,16 +49,16 @@ class UserProfile extends Component {
     const jwtToken=Cookies.get('jwt_token');
     const url=`/students/${id}/complaints/?status=Solved`;
     console.log("fetching data");
-    /*const options={
+   /* const options={
       method:'GET',
-      mode:'cors',
       headers:{
-        Authorization:`Bearer ${jwtToken}`
+        Authorization:`Bearer ${jwtToken}`,
+        'Accept': 'application/json'
       }
     }
     //proxy
-    const response = await fetch(url,options)
-    const data = await response.json()
+    const response = await fetch(url,options);
+    const data = await response.json();
     this.setState({ StudentSolvedComplaints: data, isLoading:false });*/
 
 
