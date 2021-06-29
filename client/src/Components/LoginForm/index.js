@@ -66,6 +66,10 @@ class LoginForm extends Component {
           if(responseData.user_type==='Committee'){
             this.onSubmitSuccessCommittee(responseData.jwttoken,responseData.userid);
           }
+          if(responseData.user_type==='Invalid Password'){
+            this.onSubmitFailure();
+          }
+
           //this.onSubmitSuccess(responseData.jwt_token)
         
         }

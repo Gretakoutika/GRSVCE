@@ -110,7 +110,7 @@ app.post("/login",async (request, response) => {
   }
 });
 
-app.get("/students/:id/complaints", authenticateToken,async (request, response) => {
+app.get("/students/:id/complaints",async (request, response) => {
         const { id } = request.params;
         const {status}= request.query;
         console.log(id);
@@ -146,6 +146,7 @@ app.get("/students/:id/complaints", authenticateToken,async (request, response) 
         
         const studentComplaintDetails = await db.all(getStudent_Complaints_Query);
         console.log(studentComplaintDetails);
+        response.status(400);
         response.send(studentComplaintDetails);
   
 });
