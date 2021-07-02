@@ -11,22 +11,19 @@ class LoginForm extends Component {
     errorMsg: '',
   }
   onSubmitSuccessStudent = (jwtToken,Student_id) => {
-    const {history} = this.props
-    //console.log(jwtToken);
+    const {history} = this.props;
     Cookies.set('jwt_token', jwtToken, {expires: 30});
     const slink=`/students/${Student_id}`;
-    //console.log(slink);
     history.replace(slink);
   }
   onSubmitSuccessCommittee=(jwtToken,Committee_id) => {
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
     const slink=`/committee/${Committee_id}`;
-    //console.log(slink);
     history.replace(slink);
   }
   onSubmitSuccessFaculty = (jwtToken,Faculty_id) => {
-    //console.log(Faculty_id);
+    
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
     const slink=`/faculty/${Faculty_id}`;
@@ -39,10 +36,10 @@ class LoginForm extends Component {
     event.preventDefault()
 
     const {username, password} = this.state
-    //console.log(username,password);
+    
     const userDetails = {username, password}
     const url = '/login'
-    //console.log(JSON.stringify(userDetails));
+    
     
     fetch(url, {
       method: 'POST',
@@ -55,7 +52,7 @@ class LoginForm extends Component {
     })
     .then(response => { return response.json();})
       .then(responseData=>{
-        //console.log(responseData);
+        
         if(responseData.type==="success"){
           if(responseData.user_type==='Student'){
             this.onSubmitSuccessStudent(responseData.jwttoken,responseData.userid);
@@ -70,7 +67,7 @@ class LoginForm extends Component {
             this.onSubmitFailure();
           }
 
-          //this.onSubmitSuccess(responseData.jwt_token)
+      
         
         }
         else {
