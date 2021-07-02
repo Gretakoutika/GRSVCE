@@ -32,3 +32,5 @@ SELECT COMPLAINT_ID, COMPLAINT_DESC,COMPLAINTS.DEPARTMENT,TIME,STATUS FROM COMPL
       time DESC;
 
       DELETE from complaints where STUDENT_ID like NULL;
+
+      select * from complaints where complaint_id=62;

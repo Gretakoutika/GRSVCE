@@ -11,6 +11,9 @@ import AcademicDepartment from './Components/AcademicDepartment/index.js'
 import NonAcademicDepartment from './Components/NonAcademicDepartment/index.js'
 import SolveComplaint from './Components/SolveComplaint/index.js'
 import StudentProfile from './Components/StudentProfile/index.js'
+import CommitteeProfile from './Components/CommitteeProfile/index.js'
+import lecturerProfile from './Components/lecturerProfile/index.js'
+import ShowComplaint from './Components/ShowComplaint/index.js'
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 
@@ -22,6 +25,9 @@ function App() {
       <ProtectedRoute exact path="/committee/:id" component={Committee}/>
       <ProtectedRoute exact path="/students/:id" component={UserProfile}/>
       <ProtectedRoute exact path="/students/:id/profile/:pending/:solved/" component={StudentProfile}/>
+      <ProtectedRoute exact path="/students/:id/profile/:pending/:solved/" component={CommitteeProfile}/>
+      <ProtectedRoute exact path="/faculty/:id/profile/:pending/:solved/" component={lecturerProfile}/>
+
       <ProtectedRoute exact path="/faculty/:id" component={Lecturer}/>
       <ProtectedRoute exact path="/students/:id/nonacademic" component={NonAcademic}/>
       <ProtectedRoute exact path="/students/:id/academic" component={Academic}/>
@@ -36,6 +42,7 @@ function App() {
       <ProtectedRoute exact path="/committee/:id/Admissions" component={() => <NonAcademicDepartment dept={"Admissions"}/>}/>
       <ProtectedRoute exact path="/committee/:id/Ragging" component={() => <NonAcademicDepartment dept={"Ragging"}/>}/>
       <ProtectedRoute exact path="/faculty/:id/:complaint_id/solve" component={SolveComplaint}/>
+      <ProtectedRoute exact path="/students/:id/:complaint_id/show" component={ShowComplaint}/>
 
     </Switch>
   </BrowserRouter>

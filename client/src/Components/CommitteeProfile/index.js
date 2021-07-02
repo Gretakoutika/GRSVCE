@@ -7,7 +7,7 @@ import ProfilePic from '../profilePic/index.js'
 
 
 
-const committeProfile = () => {
+const committeeProfile = () => {
     return(
         <div>
             <div>
@@ -70,4 +70,4 @@ const committeProfile = () => {
         </div>
             )
     }
-export default committeProfile;
+export default committeeProfile;

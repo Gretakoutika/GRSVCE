@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {Link,Redirect} from 'react-router-dom';
-import { Navbar,Container,Nav,NavDropdown,Table} from 'react-bootstrap'
+import { Navbar,Container,Nav,NavDropdown,Table,Button,Alert} from 'react-bootstrap'
 import {Search} from 'react-bootstrap-icons'
 
 import Header from '../Header/index.js'
@@ -14,7 +14,7 @@ import { Component } from 'react'
 class UserProfile extends Component {
   
   
-  state = { studentPendingComplaints:[], StudentSolvedComplaints: [], isLoading: true, complaint_type:"",searchInput:"",}
+  state = { studentPendingComplaints:[], StudentSolvedComplaints: [], isLoading: true, complaint_type:"",searchInput:"",showcomp:true}
   componentWillMount() {
     this.getStudentPendingComplaintsData();
     this.getStudentSolvedComplaintsData();
@@ -48,8 +48,8 @@ class UserProfile extends Component {
     const { id } = params
     const jwtToken=Cookies.get('jwt_token');
     const url=`/students/${id}/complaints/?status=Solved`;
-    console.log("fetching data");
-   /* const options={
+
+   const options={
       method:'GET',
       headers:{
         Authorization:`Bearer ${jwtToken}`,
@@ -59,10 +59,10 @@ class UserProfile extends Component {
     //proxy
     const response = await fetch(url,options);
     const data = await response.json();
-    this.setState({ StudentSolvedComplaints: data, isLoading:false });*/
+    this.setState({ StudentSolvedComplaints: data, isLoading:false });
 
 
-    fetch(url, {
+    /* fetch(url, {
       method: 'GET',
       mode:'cors',
       headers: {
@@ -76,7 +76,7 @@ class UserProfile extends Component {
         this.setState({ StudentSolvedComplaints: response, isLoading:false });
         return response;
       })
-      .catch((error) => console.log("error",error));
+      .catch((error) => console.log("error",error));*/
   }
   
   
@@ -92,10 +92,16 @@ class UserProfile extends Component {
         searchInput: event.target.value
       })
       }
+    setShowComp=(status)=>{
+      console.log(status)
+      this.setState({
+        showcomp:status
+      })
+    }
+    
   render(){
 
     const { isLoading,searchInput}=this.state;
-
     const { match } = this.props
     const { params } = match
     const { id } = params
@@ -141,8 +147,7 @@ class UserProfile extends Component {
                     
                     <NavDropdown title="Raise complaint" id="basic-nav-dropdown">
                     <NavDropdown.Item href={url2}>Academic</NavDropdown.Item>
-                        <NavDropdown.Item className="item"><Link params={{ totalComplaints: {count} }} to={url}> Non-Academic</Link></NavDropdown.Item>
-                        
+                    <NavDropdown.Item ><Link id="non" params={{ totalComplaints: {count} }} to={url}> Non-Academic</Link></NavDropdown.Item>  
                     </NavDropdown>
                     <Nav><input id="searchbar" type="search" value={searchInput} className="mr-3" placeholder="Enter the department" onChange={this.onChangeSearchInput}/></Nav>
                    
@@ -167,6 +172,8 @@ class UserProfile extends Component {
             <th>Department</th>
             <th>Time</th>
             <th>Status</th>
+            <th>Show</th>
+            
 
           </tr>
         </thead>
@@ -176,14 +183,16 @@ class UserProfile extends Component {
           <Loader type="ThreeDots" color="grey" height={50} width={50} />
         ) : (
                   searchPendingResults.map((complaint)=>{
+                    const showUrl=`${id}/${complaint.COMPLAINT_ID}/show`
                         return(
-                          
+                            
                             <tr id="sc" key={complaint.COMPLAINT_ID}>
                               <td >{complaint.COMPLAINT_ID}</td>
                               <td>{complaint.COMPLAINT_DESC}</td>
                               <td>{complaint.DEPARTMENT}</td>
                               <td>{complaint.TIME}</td>
                               <td>{complaint.STATUS}</td>
+                              <td><Button href={showUrl}> Show</Button></td> 
                             </tr>
                         );
                   }))}
@@ -207,6 +216,7 @@ class UserProfile extends Component {
             <th>Solution Description</th>
             <th>Time</th>
             
+            
 
           </tr>
         </thead>
@@ -224,7 +234,7 @@ class UserProfile extends Component {
                               <td >{complaint.complaint_descp}</td>
                               <td>{complaint.solution_descp}</td>
                               <td>{complaint.solvedtime}</td>
-                              
+                              {/*<td><Button variant="danger" onClick={()=>this.onDelete(complaint.complaint_id)}>Delete</Button></td>*/}
                             </tr>
                         );
                   }))}

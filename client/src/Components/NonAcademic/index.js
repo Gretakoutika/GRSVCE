@@ -1,4 +1,4 @@
-import './index.css'
+
 import {Form,FormLabel,Row,Col,Button,Container,Alert} from 'react-bootstrap'
 import {Component} from 'react'
 import {Link} from 'react-router-dom';

@@ -89,16 +89,16 @@ app.post("/login",async (request, response) => {
     response.status(400);
     response.send("Invalid User");
   } else {
-    console.log(password);
-    console.log(dbUser.PASSWORD)
+    //console.log(password);
+    //console.log(dbUser.PASSWORD)
     const isPasswordMatched = (password === dbUser.PASSWORD) ?true:false;
     console.log(isPasswordMatched);
     if (isPasswordMatched === true) {
       const userType=dbUser.TYPE;
       const userid=dbUser.USER_ID;
-      console.log(userType);
+      //console.log(userType);
       const payload={"type":"success","user_type":userType,userid};
-      const secret=process.env.SECRET;
+      const secret="RSGECV";
       const jwttoken=jwt.sign(payload,secret);
       const result={"type":"success","user_type":userType,userid,jwttoken};
       response.send(result);
@@ -113,7 +113,7 @@ app.post("/login",async (request, response) => {
 app.get("/students/:id/complaints",async (request, response) => {
         const { id } = request.params;
         const {status}= request.query;
-        console.log(id);
+        //console.log(id);
         var getStudent_Complaints_Query="";
         if(status==='Pending'){
           getStudent_Complaints_Query=`SELECT COMPLAINT_ID, COMPLAINT_DESC,COMPLAINTS.DEPARTMENT,TIME,STATUS FROM COMPLAINTS INNER JOIN STUDENTS
@@ -145,7 +145,7 @@ app.get("/students/:id/complaints",async (request, response) => {
         }
         
         const studentComplaintDetails = await db.all(getStudent_Complaints_Query);
-        console.log(studentComplaintDetails);
+        //console.log(studentComplaintDetails);
         response.status(400);
         response.send(studentComplaintDetails);
   
@@ -153,12 +153,12 @@ app.get("/students/:id/complaints",async (request, response) => {
 
 app.post("/students/:id/complaints", async (request, response) => {
   const { id } = request.params;
-  console.log(id);
+  //console.log(id);
   const complaintDetails=request.body;
     const {department,complaintDesc,selectedFacultyId,complaint_type}=complaintDetails;
     const date=`select DATETIME('now','localtime') as Datetime`;
     const dateResponse=await db.get(date);
-    console.log(dateResponse.Datetime);
+    //console.log(dateResponse.Datetime);
     const sqlQuery = `insert into complaints(complaint_desc,department,time,status,student_id,SELECTED_FACULTY_ID,TYPE,forward_status)values('${complaintDesc}','${department}','${dateResponse.Datetime}','Pending',${id},${selectedFacultyId},'${complaint_type}','Forward');`;
     const dbresponse= await db.run(sqlQuery);
     response.send("Complaint added successfully");
@@ -167,23 +167,39 @@ app.post("/students/:id/complaints", async (request, response) => {
 app.put('/students/:id/complaints',async(request,response)=>{
     
   const {id} = request.params;
-  console.log(id);
+  //console.log(id);
   const ids=request.body;
   const{forwardstatus,complaintid}=ids;
   const complaint_id=parseInt(complaintid);
-  console.log(forwardstatus,complaint_id);
+  //console.log(forwardstatus,complaint_id);
   const sqlQuery=`update complaints set forward_status='${forwardstatus}' where student_Id=${id} and complaint_id=${complaint_id}`;
   const Studentsobject=await db.run(sqlQuery);
   response.send("Updation Sucessfull");
 });
 
+/*app.delete('/complaints/:complaintid',async(request,response)=>{
+    
+  const{complaintid}=request.params;
+  const complaint_id=parseInt(complaintid);
+  //console.log(complaint_id);
+  const sqlQuery=`delete from complaints where complaint_id=${complaint_id}`;
+  await db.run(sqlQuery);
+  response.send("deletion Sucessfull");
+  
+});*/
 
 app.get("/students/:id", async (request, response) => {
   const { id } = request.params;
-  console.log(id);
+  //console.log(id);
   const getStudent_Query = `SELECT * FROM  STUDENTS WHERE STUDENT_ID = ${id};`;
   const studentDetails = await db.get(getStudent_Query);
   response.send(studentDetails);
+});
+app.get("/faculty/:id", async (request, response) => {
+  const { id } = request.params;
+  const getLecturerDetails = `SELECT * FROM  USERS WHERE USER_ID = ${id};`;
+  const LecturerDetails = await db.get(getLecturerDetails );
+  response.send(LecturerDetails);
 });
 
 app.get("/faculty/", async (request, response) => {
@@ -193,13 +209,13 @@ app.get("/faculty/", async (request, response) => {
   response.send(LecturerDetails);
 });
 
-app.get("/faculty/:id/complaints",authenticateToken, async (request, response) => {
+app.get("/faculty/:id/complaints", async (request, response) => {
   const { id } = request.params;
   const {status}= request.query;
-  console.log(id);
+  //console.log(id);
   const getFaculty_Complaints_Query=`select complaints.complaint_id,complaints.student_id,students.FIRST_NAME,students.LAST_NAME,complaint_desc,time,status from complaints inner join students on complaints.student_id==students.STUDENT_ID where selected_faculty_id = ${id} and status='${status}' and complaints.forward_status like 'Forwarded' order by complaints.TIME desc;`;
   const  Faculty_ComplaintDetails= await db.all(getFaculty_Complaints_Query);
-  console.log(Faculty_ComplaintDetails);
+  //console.log(Faculty_ComplaintDetails);
   response.send(Faculty_ComplaintDetails);
 });
 
@@ -210,7 +226,7 @@ app.get("/academiccomplaints/",async(request,response)=>{
   SELECT COMPLAINT_ID, STUDENT_ID,TIME, COMPLAINT_DESC,SELECTED_FACULTY_ID,STATUS,NAME,forward_status FROM COMPLAINTS INNER JOIN USERS
   ON COMPLAINTS.SELECTED_FACULTY_ID = USERS.USER_ID  where complaints.TYPE like 'Academic' and complaints.DEPARTMENT like '${dept}' order by time desc;`;
 const complaintsArray = await db.all(getComplaintsDepartment);
-console.log(complaintsArray);
+//console.log(complaintsArray);
 response.send(complaintsArray);
 });
 
@@ -226,7 +242,7 @@ app.get("/nonacademiccomplaints/",async(request,response)=>{
     ORDER BY
       time DESC;`;
 const complaintsArray = await db.all(getComplaintsDepartment);
-console.log(complaintsArray);
+//console.log(complaintsArray);
 response.send(complaintsArray);
 });
 
@@ -237,18 +253,25 @@ app.get("/faculty/:id/:complaint_id/",async(request,response)=>{
   const getComplaint=`
   select complaints.complaint_id,complaints.student_id,students.FIRST_NAME,students.LAST_NAME,complaint_desc,time,status,students.USERNAME from complaints inner join students on complaints.student_id==students.STUDENT_ID where selected_faculty_id = ${id} and complaint_id=${complaint_id}`;
 const complaint= await db.get(getComplaint);
-console.log(complaint);
+//console.log(complaint);
 response.send(complaint);
 });
+
+app.get("/complaint/:complaint_id",async(request,response)=>{
+  const{complaint_id}=request.params;
+  const getComplaint=`select * from complaints where  complaint_id=${complaint_id}`;
+  const complaint= await db.get(getComplaint);
+  response.send(complaint);
+})
 
 
 app.post("/:complaint_id/solution", async (request, response) => {
   const { complaint_id } = request.params;
-  console.log(complaint_id);
+  //console.log(complaint_id);
   const {solution}=request.body;
     const date=`select DATETIME('now','localtime') as Datetime`;
     const dateResponse=await db.get(date);
-    console.log(dateResponse.Datetime);
+    //console.log(dateResponse.Datetime);
     const sqlQuery = `insert into solutions(description,complaint_id,time)values('${solution}',${complaint_id},'${dateResponse.Datetime}');`;
     const dbresponse= await db.run(sqlQuery);
     response.send("Solution added successfully");
@@ -257,7 +280,7 @@ app.post("/:complaint_id/solution", async (request, response) => {
 app.put('/:complaint_id/changestatus',async(request,response)=>{
     
   const { complaint_id } = request.params;
-  console.log(complaint_id);
+  //console.log(complaint_id);
   const sqlQuery=`update complaints set status='Solved' where complaint_id=${complaint_id}`;
   const Studentsobject=await db.run(sqlQuery);
   response.send("Updation Sucessfull");

@@ -76,15 +76,19 @@ class Lecturer extends Component {
     const { match } = this.props;
     const { params } = match;
     const { id } = params;
-    console.log(id);
+
     const receivedResults=this.state.recievedComplaints.filter((comp)=>{
-      console.log(comp.DEPARTMENT)
+
       return comp.COMPLAINT_DESC.includes(searchInput);
     })
     const solvedResults=this.state.solvedComplaints.filter((comp)=>{
       return comp.COMPLAINT_DESC.includes(searchInput);
     })
-    const count= this.state.recievedComplaints.length+this.state.solvedComplaints.length;
+    
+    //const count= this.state.recievedComplaints.length+this.state.solvedComplaints.length;
+    const pending=this.state.recievedComplaints.length;
+    const solved=this.state.solvedComplaints.length;
+    const profileurl=`/faculty/${id}/profile/${pending}/${solved}/`;
   return (
     
     <div>
@@ -107,7 +111,8 @@ class Lecturer extends Component {
                     <Nav> <a href="#pendingcomplaints" > Pending complaints </a></Nav>
                     <Nav> <a href="#solvedcomplaints" > Solved complaints </a></Nav>
                     <Nav><input type="search" value={searchInput} placeholder="Enter any keyword in Grievence Description" onChange={this.onChangeSearchInput}/></Nav>
-                    <Nav className="item">Complaints Count={count}</Nav>
+                    {/*<Nav className="item">Complaints Count={count}</Nav>*/}
+                    <Nav> <a href={profileurl} className="item">My Profile </a> </Nav>
                     <Nav className="item" onClick={this.onLogout}>Logout</Nav>
                     
             </Nav>

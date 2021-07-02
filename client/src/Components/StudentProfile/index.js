@@ -37,6 +37,8 @@ class StudentProfile extends Component{
         const { params } = match
         console.log(params);
         const {id,pending,solved} = params
+    
+    const url=`/students/${id}`;
         
         return(
             <div>
@@ -75,7 +77,7 @@ class StudentProfile extends Component{
                                     <Form.Control  value={studentData.email} id="text" placeholder="email" />
                                     </Row>
                             </Row>
-                            <Row className="conatiner1 d-flex flex-row">
+                            <Row className="container1 d-flex flex-row">
                                     <Row  className="m-2 col-xs-12 col-md-3">
                                     <h1 className="labelHeading" >Complaints Raised:</h1>
                                     <Form.Control value={parseInt(pending)+parseInt(solved)} placeholder="Count" />
@@ -95,6 +97,7 @@ class StudentProfile extends Component{
                             
                         </Row>
                     </Form>
+                    <Button href={url}>Back</Button>
                     </div>
             </div>
 
