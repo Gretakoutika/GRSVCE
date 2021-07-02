@@ -38,7 +38,6 @@ class UserProfile extends Component {
     const url=`/students/${id}/complaints/?status=Pending`;
     const response = await fetch(url,options);
     const data = await response.json()
-    //console.log(data);
     this.setState({ studentPendingComplaints: data, isLoading:false });
     
   }
@@ -62,21 +61,7 @@ class UserProfile extends Component {
     this.setState({ StudentSolvedComplaints: data, isLoading:false });
 
 
-    /* fetch(url, {
-      method: 'GET',
-      mode:'cors',
-      headers: {
-        'Accept': 'application/json',
-        Authorization:`Bearer ${jwtToken}`,
-      }
-    })
-    .then(response => { return response.json();})
-      .then(response=>{
-        console.log(response);
-        this.setState({ StudentSolvedComplaints: response, isLoading:false });
-        return response;
-      })
-      .catch((error) => console.log("error",error));*/
+    
   }
   
   
@@ -84,7 +69,7 @@ class UserProfile extends Component {
       const {history} = this.props;
       Cookies.remove('jwt_token');
       history.replace('/');
-      //window.location.replace("/");
+     
       
     }
     onChangeSearchInput = (event) => {
@@ -109,9 +94,7 @@ class UserProfile extends Component {
 
     const url=`/students/${id}/nonacademic`;
     const url2=`/students/${id}/academic`;
-    //const profileurl=`/students/${id}/profile/`;
    
-    //console.log(profileurl);
     const count= this.state.studentPendingComplaints.length+this.state.StudentSolvedComplaints.length;
     const pending=this.state.studentPendingComplaints.length;
     const solved=this.state.StudentSolvedComplaints.length;
@@ -234,7 +217,7 @@ class UserProfile extends Component {
                               <td >{complaint.complaint_descp}</td>
                               <td>{complaint.solution_descp}</td>
                               <td>{complaint.solvedtime}</td>
-                              {/*<td><Button variant="danger" onClick={()=>this.onDelete(complaint.complaint_id)}>Delete</Button></td>*/}
+                              
                             </tr>
                         );
                   }))}
