@@ -18,14 +18,12 @@ class Academic extends Component{
 
     onSubmitData= async event=>{
         event.preventDefault();
-        console.log(this.state.departmentCheckbox);
-        console.log(this.state.greivenceDescription);
-        console.log(this.state.selectedFacultyId);
+        
         
             const { match } = this.props
             const { params } = match
             const { id } = params
-            console.log(id);
+            
             const {departmentCheckbox,greivenceDescription,selectedFacultyId} = this.state
             if(departmentCheckbox===""|| greivenceDescription===""||selectedFacultyId===""){
                 this.setState({
@@ -40,8 +38,7 @@ class Academic extends Component{
             const complaint_type='Academic';
             const ComplaintDetails = {department,complaintDesc,selectedFacultyId,complaint_type}
             const url = `/students/${id}/complaints`;
-            console.log(url);
-            console.log(JSON.stringify(ComplaintDetails));
+            
             
             const response=await fetch(url, {
             method: 'POST',
@@ -78,7 +75,7 @@ class Academic extends Component{
                 const url=`/faculty/?dept=${dept}`;
                 const response = await fetch(url)
                 const data = await response.json()
-                console.log(data);
+        
                 this.setState({ faculty: data });
        
            };
@@ -91,14 +88,14 @@ class Academic extends Component{
     render()
     
    
-    {  console.log(this.state.departmentCheckbox);
+    {  
     const { match } = this.props
     const { params } = match
     const { id } = params
-    console.log(id);
+    
     const url=`/students/${id}`;
         const {status, statusDesc} = this.state
-        console.log(status,statusDesc);
+       
         return(
             
         <div>
@@ -107,36 +104,7 @@ class Academic extends Component{
             
             <Container>
             <Form onSubmit={this.onSubmitData}>
-                {/*<Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                <Form.Label column sm={2}>
-                    First Name
-                </Form.Label>
-                    <Col sm={10}>
-                    <Form.Control type="textarea" placeholder="FirstName" />
-                    </Col>
-                </Form.Group>
                 
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                    <Form.Label column sm={2}>
-                    Last Name
-                    </Form.Label>
-                    <Col sm={10}>
-                    <Form.Control type="textarea" placeholder="LastName" />
-                    </Col>
-                </Form.Group>
-
-                
-
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                    <Form.Label column sm={2}>
-                    Email
-                    </Form.Label>
-                    <Col sm={10}>
-                    <Form.Control type="email" placeholder="Email" />
-                    </Col>
-                </Form.Group>
-                
-                */}
                 <Container className="d-flex flex-column">
                 <fieldset>
                     <Form.Group as={Row} className="mb-3">
@@ -209,7 +177,7 @@ class Academic extends Component{
                 <DropdownButton id="dropdown-basic-button" title="Dropdown button" onClick={this.getFaculty}>
 
                     {this.state.faculty.map((item)=>{
-                        console.log(item);
+                       
                         return(<Dropdown.Item key={item.USER_ID} onClick={(e)=>this.setState({selectedFacultyId:item.USER_ID})}>{item.NAME}</Dropdown.Item>);
                     })}
                 </DropdownButton>
