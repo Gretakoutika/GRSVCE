@@ -13,10 +13,9 @@ class AcademicDepartment extends Component{
         this.getAcademicComplaintsData(this.props.dept);
     }
     getAcademicComplaintsData=async (dept) => {
-      console.log("complaints data function")
-      console.log(`dept ${dept}`);
+      
         const url=`/academiccomplaints/?dept=${dept}`;
-        console.log(url);
+        
         const response = await fetch(url)
         const data = await response.json()
         this.setState({ AcademicComplaints: data, isLoading:false });
@@ -28,7 +27,7 @@ class AcademicDepartment extends Component{
             const ComplaintForwardDetails = {forwardstatus,complaintid};
             
             const urlf = `/students/${student_id}/complaints`;
-            console.log(urlf);            
+                        
             fetch(urlf, {
                 method: 'PUT',
                 mode:'cors',
@@ -42,7 +41,7 @@ class AcademicDepartment extends Component{
         
       }
     render(){
-        console.log(this.props.dept);
+       
         const{isLoading}=this.state;
         return(
             
