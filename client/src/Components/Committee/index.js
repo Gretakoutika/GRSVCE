@@ -3,9 +3,6 @@ import Header from '../Header/index.js'
 
 import {Link} from 'react-router-dom'
 import { Navbar,Container,Nav,NavDropdown} from 'react-bootstrap'
-//import FinanceComplaints from '../FinanceComplaints/index.js';
-//import RaggingComplaints from '../RaggingComplaints/index.js';
-//import AdmissionsComplaints from '../AdmissionsComplaints/index.js';
 import Cookies from 'js-cookie'
 import './committee.css'
 import AcademicDepartment from '../AcademicDepartment/index.js'
@@ -34,7 +31,7 @@ class Committee extends Component{
     const { match } = this.props
     const { params } = match
     const { id } = params
-    console.log(id);
+
     const {dept}=this.state;
     const urlCse=`/committee/${id}/CSE`;
     const urlEce=`/committee/${id}/ECE`;
